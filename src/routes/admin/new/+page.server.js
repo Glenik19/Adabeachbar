@@ -2,7 +2,6 @@ import { createConnection } from '$lib/db/mysql';
 import { redirect } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { put } from "@vercel/blob";
-import { BLOB_READ_WRITE_TOKEN } from "$env/static/private";
 
 export async function load() {
 	let connection = await createConnection();
