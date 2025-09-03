@@ -1,10 +1,10 @@
 <script>
-	let { data } = $props();
+	let { data, form} = $props();
 </script>
 
-<h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Create a New Product</h1>
+<h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Edit Product</h1>
 
-<form method="POST" action="?/createProduct" enctype="multipart/form-data" class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto space-y-4">
+<form method="POST" action="?/editProduct" enctype="multipart/form-data" class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto space-y-4">
 	<div class="space-y-2">
 		<label for="name" class="block text-sm font-medium text-gray-700">Name</label>
 		<input type="text" name="name" id="name" placeholder="Enter name"  class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
@@ -28,6 +28,6 @@
 
 
 	<button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md text-lg font-semibold hover:bg-blue-700 transition">
-		Create Product
+		Edit Product
 	</button>
 </form>

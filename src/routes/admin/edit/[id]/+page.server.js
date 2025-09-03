@@ -4,41 +4,21 @@ import { error } from '@sveltejs/kit';
 import { put } from "@vercel/blob";
 import { BLOB_READ_WRITE_TOKEN, EDITOR } from "$env/static/private";
 
-export async function load() {
-	let connection = await createConnection();
-	let [rows] = await connection.execute('SELECT * FROM MENU');
-
-	return {
-		products: rows
-	};
-}
-
 export const actions = {
-	createProduct: async ({ request }) => {
+editProduct: async ({ request, params }) => {
 		const formData = await request.formData();
-		const uploadedImage = formData.get("uploadedImage");
+		const {id} = params;
+		const name = formData.get('name');
+		const description = formData.get('description');
+		const price = formData.get('price');
+        const uploadedImage = formData.get("uploadedImage");
 		const { url } = await put('product_image/' + uploadedImage.name, uploadedImage, { access: "public", token: BLOB_READ_WRITE_TOKEN, addRandomSuffix: true });
-		console.log(formData);
-
 		const connection = await createConnection();
 		const [result] = await connection.execute(
-			'INSERT INTO MENU (name, description, price, image) VALUES (?, ?, ?, ?)',
-			[
-				formData.get('name'),
-				formData.get('description'),
-				formData.get('price'),
-				url
-			]
+			'UPDATE MENU SET name = ?, description = ?, price = ?, image = ? WHERE id = ?',
+			[name, description, price, url, id]
 		);
-		if (result.affectedRows) {
-			redirect(303, '/admin');
-		}
-	},
+		 redirect(303, '/admin');
+	}
 	
 }
-
-      
-   
-
-   
-

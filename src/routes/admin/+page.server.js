@@ -19,6 +19,10 @@ export const actions = {
 		const formData = await request.formData();
 		const id = formData.get('id');
 		const connection = await createConnection();
-		const [result] = await connection.execute('DELETE FROM products WHERE id = ?', [id]);
+		const [result] = await connection.execute('DELETE FROM MENU WHERE id = ?', [id]);
 	}
+
+	
+
+	
 };
